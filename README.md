@@ -23,9 +23,9 @@ facilitando o controle de informações de fornecedores e incentivando práticas
 npm install
 2. Criar database
 executar o arquivo ods12_db.sql
-4. Iniciar servidor:
+2. Iniciar servidor:
 node server.js
-5. Acessar no navegador:
+3. Acessar no navegador:
 http://localhost:3000
 
 ## Autor/Matrícula
