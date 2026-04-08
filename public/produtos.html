@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+</head>
+<body>
+    
+    <h2>Lista de Produtos</h2>
+
+<ul id="lista"></ul>
+
+<a href="/">Voltar</a>
+
+<script>
+async function carregar() {
+  const res = await fetch('/produtos');
+  const dados = await res.json();
+
+  const lista = document.getElementById('lista');
+  lista.innerHTML = '';
+
+  dados.forEach(p => {
+    lista.innerHTML += `
+      <li>
+        <input value="${p.nome}" id="nome-${p.id}">
+        <input value="${p.valor}" id="valor-${p.id}">
+        <input value="${p.descricao}" id="descricao-${p.id}">
+        <input value="${p.fornecedor}" id="fornecedor-${p.id}">
+        <input value="${p.email}" id="email-${p.id}">
+        <input value="${p.telefone}" id="telefone-${p.id}">
+
+        <button onclick="atualizar(${p.id})">Atualizar</button>
+        <button onclick="deletar(${p.id})">Apagar</button>
+      </li>
+    `;
+  });
+}
+
+async function atualizar(id) {
+  const data = {
+    nome: document.getElementById(`nome-${id}`).value,
+    valor: document.getElementById(`valor-${id}`).value,
+    descricao: document.getElementById(`descricao-${id}`).value,
+    fornecedor: document.getElementById(`fornecedor-${id}`).value,
+    email: document.getElementById(`email-${id}`).value,
+    telefone: document.getElementById(`telefone-${id}`).value
+  };
+
+  await fetch(`/produtos/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+
+  alert('Atualizado!');
+  carregar();
+}
+
+async function deletar(id) {
+  await fetch(`/produtos/${id}`, {
+    method: 'DELETE'
+  });
+
+  carregar();
+}
+
+carregar();
+</script>
+
+</body>
+</html>
