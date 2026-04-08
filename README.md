@@ -21,9 +21,11 @@ facilitando o controle de informações de fornecedores e incentivando práticas
 
 1. Instalar dependências:
 npm install
-2. Iniciar servidor:
+2. Criar database
+executar o arquivo ods12_db.sql
+4. Iniciar servidor:
 node server.js
-3. Acessar no navegador:
+5. Acessar no navegador:
 http://localhost:3000
 
 ## Autor/Matrícula
